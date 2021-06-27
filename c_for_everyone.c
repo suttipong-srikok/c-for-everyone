@@ -4,8 +4,9 @@
 #include <stdio.h>
 
 enum day { sun, mon, tue, wed, thu, fri, sat};  //declare type
+typedef enum day day;
 
-void print_day(enum day d)
+void print_day(day d)
 {
     switch(d)
     {
@@ -20,14 +21,14 @@ void print_day(enum day d)
     }
 }
 
-enum day next_day(enum day d)
+day next_day(day d)
 {
     return (d + 1 % 7);
 }
 
 int main()
 {
-    enum day today = fri;
+    day today = fri;
     print_day(today);
     printf("\n\n");
     print_day(7);
