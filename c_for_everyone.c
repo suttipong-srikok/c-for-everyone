@@ -1,39 +1,43 @@
-/*  Enumerated Types
+/*  Use of Macro's
+    Sammy Programmer
+    Aug. 10, 2019
 */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-enum day { sun, mon, tue, wed, thu, fri, sat};  //declare type
-typedef enum day day;
+#define MAX_ELEPHANT_SEAL_WT_MALE 8800
+#define MIN_ELEPHANT_SEAL_WT_MALE 4400
 
-void print_day(day d)
+/* note female range is 800-2000 lbs */
+
+/* produce a macro that randomly generates a male weight */
+
+#define RANGE 4400
+#define POPULATION     1000
+#define WEIGHT_OVER    rand()% RANGE
+#define WEIGHT         WEIGHT_OVER + MIN_ELEPHANT_SEAL_WT_MALE
+#define FILL           for (i = 0; i < POPULATION; i++) \ 
+                           data[i] = WEIGHT
+
+void print_data(int d[], int size)
 {
-    switch(d)
+    int i;
+    for (i = 0; i < size; i++) 
     {
-        case sun: printf(" sunday "); break;
-        case mon: printf(" monday "); break;
-        case tue: printf(" tuesday "); break;
-        case wed: printf(" wednesday "); break;
-        case thu: printf(" thursday "); break;
-        case fri: printf(" friday "); break;
-        case sat: printf(" saturday "); break;
-        default: printf("%d  is and error", d);
+        printf("%d\t", d[i]);
+        if ((i + 1) % 10 == 0) printf("\n");
     }
-}
-
-day next_day(day d)
-{
-    return (d + 1 % 7);
 }
 
 int main()
 {
-    day today = fri;
-    print_day(today);
-    printf("\n\n");
-    print_day(7);
-    printf("\n\n");
-    print_day(next_day(today));
+    int i;
+    int data[POPULATION];
+    srand(time(0));
+    FILL;
+    print_data(data, POPULATION);
     printf("\n\n");
     return 0;
 }
